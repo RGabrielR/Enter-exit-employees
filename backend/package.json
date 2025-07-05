@@ -4,8 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www.ts --no-experimental-strip-types",
-    "dev": "ts-node --esm ./bin/www.ts",
+    "build": "tsc",
+    "start": "node ./src/bin/www.ts",
+    "dev": "ts-node --esm ./src/bin/www.ts",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
