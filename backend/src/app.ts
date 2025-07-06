@@ -1,10 +1,9 @@
-// src/app
 import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
 
-import recordRoutes from './routes/RecordRoute';
-import employeeRoutes from './routes/EmployeeRoute';
+import recordRoutes from './routes/RecordRoute.js';
+import employeeRoutes from './routes/EmployeeRoute.js';
 
 const app = express();
 

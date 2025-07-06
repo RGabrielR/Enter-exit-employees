@@ -1,14 +1,14 @@
-export declare function registerEntry(employeeId: string, selectedDate?: Date): Promise<import("mongoose").Document<unknown, {}, import("../models/Record").IRecord, {}> & import("../models/Record").IRecord & Required<{
+export declare function registerEntry(employeeId: string, selectedDate?: Date): Promise<import("mongoose").Document<unknown, {}, import("../models/Record.js").IRecord, {}> & import("../models/Record.js").IRecord & Required<{
     _id: unknown;
 }> & {
     __v: number;
 }>;
 export declare function registerExit(employeeId: string, selectedDate?: Date): Promise<{
-    record: import("mongoose").Document<unknown, {}, import("../models/Record").IRecord, {}> & import("../models/Record").IRecord & Required<{
+    record: import("mongoose").Document<unknown, {}, import("../models/Record.js").IRecord, {}> & import("../models/Record.js").IRecord & Required<{
         _id: unknown;
     }> & {
         __v: number;
     };
-    message: string;
+    message: string | null;
     hours: number;
 }>;

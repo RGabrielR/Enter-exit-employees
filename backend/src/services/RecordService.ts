@@ -1,5 +1,5 @@
-import Record, { RecordType} from '../models/Record';
-import { selectedTimestampFormat } from '../utils/selectedTimestampFormat';
+import Record, { RecordType} from '../models/Record.js';
+import { selectedTimestampFormat } from '../utils/selectedTimestampFormat.js';
 
 export async function registerEntry(employeeId: string, selectedDate?: Date) {
   const selectedTimestamp = selectedTimestampFormat(selectedDate);
@@ -48,7 +48,7 @@ export async function registerExit(employeeId: string, selectedDate?: Date) {
     throw new Error('El empleado ya fue egresado.');
   }
 
-  const timeMs = new Date(selectedDate).getTime() - new Date(entryPending.selectedTimestamp).getTime();
+  const timeMs = selectedDate ? new Date(selectedDate).getTime() - new Date(entryPending.selectedTimestamp).getTime() : 0;
   const hours = timeMs / (1000 * 60 * 60);
 
   const newExit = await Record.create({

@@ -1,5 +1,5 @@
-import Record from '../models/Record';
-import Employee from '../models/Employee';
+import Record from '../models/Record.js';
+import Employee from '../models/Employee.js';
 export async function getEmployeesInside() {
     const lastRecords = await Record.aggregate([
         { $sort: { selectedTimestamp: -1 } },

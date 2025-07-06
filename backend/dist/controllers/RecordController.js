@@ -1,4 +1,4 @@
-import { registerEntry, registerExit } from '../services/RecordService';
+import { registerEntry, registerExit } from '../services/RecordService.js';
 export async function handleRegisterEntry(req, res) {
     try {
         const { employeeId, selectedTimestamp } = req.body;

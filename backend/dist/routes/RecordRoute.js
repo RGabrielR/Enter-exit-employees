@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleRegisterEntry, handleRegisterExit } from '../controllers/RecordController';
+import { handleRegisterEntry, handleRegisterExit } from '../controllers/RecordController.js';
 const router = express.Router();
 router.post('/entry', handleRegisterEntry);
 router.post('/exit', handleRegisterExit);

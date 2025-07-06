@@ -1,4 +1,4 @@
-import { getEmployeesInside, getAllEmployees } from '../services/EmployeeService';
+import { getEmployeesInside, getAllEmployees } from '../services/EmployeeService.js';
 export async function handleGetEmployeesInside(req, res) {
     try {
         const employees = await getEmployeesInside();
