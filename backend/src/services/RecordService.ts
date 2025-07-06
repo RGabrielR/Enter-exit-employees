@@ -1,5 +1,5 @@
-import Record, { RecordType} from '../models/Record.ts';
-import { selectedTimestampFormat } from '../utils/selectedTimestampFormat.ts';
+import Record, { RecordType} from '../models/Record';
+import { selectedTimestampFormat } from '../utils/selectedTimestampFormat';
 
 export async function registerEntry(employeeId: string, selectedDate?: Date) {
   const selectedTimestamp = selectedTimestampFormat(selectedDate);

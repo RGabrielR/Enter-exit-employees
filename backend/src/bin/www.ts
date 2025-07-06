@@ -1,7 +1,7 @@
 
 import http from 'http';
-import app from '../app.ts';
-import { connectDB } from '../config/db.ts';
+import app from '../app';
+import { connectDB } from '../config/db';
 
 const PORT = normalizePort(process.env.PORT ?? '4000');
 app.set('port', PORT);

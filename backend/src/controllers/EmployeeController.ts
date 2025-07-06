@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { getEmployeesInside, getAllEmployees } from '../services/EmployeeService.ts';
+import { getEmployeesInside, getAllEmployees } from '../services/EmployeeService';
 
 export async function handleGetEmployeesInside(req: Request, res: Response): Promise<void> {
   try {

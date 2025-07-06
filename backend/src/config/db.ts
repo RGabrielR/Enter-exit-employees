@@ -1,4 +1,4 @@
-// src/config/db.ts
+// src/config/db
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 

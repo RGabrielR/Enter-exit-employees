@@ -1,5 +1,5 @@
-import Record from '../models/Record.ts';
-import Employee from '../models/Employee.ts';
+import Record from '../models/Record';
+import Employee from '../models/Employee';
 
 export async function getEmployeesInside() {
   const lastRecords = await Record.aggregate([

@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { registerEntry, registerExit } from '../services/RecordService.ts';
+import { registerEntry, registerExit } from '../services/RecordService';
 
 export async function handleRegisterEntry(req: Request, res: Response): Promise<void> {
   try {

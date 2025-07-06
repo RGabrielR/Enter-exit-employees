@@ -2,5 +2,5 @@
   "watch": ["src", "bin"],
   "ext": "ts,json",
   "ignore": ["node_modules"],
-  "exec": "ts-node --esm ./bin/www.ts"
+  "exec": "ts-node --esm ./bin/www"
 }
