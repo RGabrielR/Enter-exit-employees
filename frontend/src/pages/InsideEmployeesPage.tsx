@@ -27,9 +27,7 @@ export default function InsideListPage() {
 
   const employeeList =
     employees.length === 0 ? (
-      <div className="flex items-center justify-center">
-        <SpinnerRoundFilled size={150} color="blue" />
-      </div>
+      <p className="animate-pulse text-gray-500">No hay empleados dentro.</p>
     ) : (
       <ul className="max-h-96 space-y-2 overflow-y-auto pr-2">
         {employees.map((e) => (
@@ -50,7 +48,9 @@ export default function InsideListPage() {
       <div className="mx-auto mt-10 max-w-xl space-y-4 rounded-2xl bg-white p-6 shadow-md">
         <h2 className="mb-4 text-2xl font-bold text-gray-950">Empleados actualmente dentro</h2>
         {loading ? (
-          <p className="animate-pulse text-gray-500">Cargando empleados...</p>
+          <div className="flex items-center justify-center">
+            <SpinnerRoundFilled size={150} color="blue" />
+          </div>
         ) : (
           employeeList
         )}

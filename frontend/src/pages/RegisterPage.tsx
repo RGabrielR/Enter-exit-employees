@@ -93,16 +93,10 @@ export default function RegisterPage() {
         />
 
         <div className="flex gap-4">
-          <button
-            onClick={() => handleSubmit('entry')}
-            className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
-          >
+          <button onClick={() => handleSubmit('entry')} className="rounded px-4 py-2 text-white">
             Registrar Ingreso
           </button>
-          <button
-            onClick={() => handleSubmit('exit')}
-            className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-          >
+          <button onClick={() => handleSubmit('exit')} className="rounded px-4 py-2 text-white">
             Registrar Egreso
           </button>
         </div>
