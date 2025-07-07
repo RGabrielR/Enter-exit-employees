@@ -7,15 +7,17 @@ export async function registerEntry(employeeId: string, selectedDate?: Date) {
     employeeId,
     type: RecordType.ENTRY,
   }).sort({ actualTimestamp: -1 });
-
-  const exitAfterwards = await Record.findOne({
-    employeeId,
-    type: RecordType.EXIT,
-    selectedDate: { $gt: selectedTimestamp }
-  });
   
-  if (lastEntry && !exitAfterwards) {
-    throw new Error('El empleado ya está dentro de la compañía.');
+  if (lastEntry) {
+    const exitAfterwards = await Record.findOne({
+      employeeId,
+      type: RecordType.EXIT,
+      selectedTimestamp: { $gt: lastEntry.selectedTimestamp }
+    });
+    
+    if (!exitAfterwards) {
+      throw new Error('El empleado ya está dentro de la compañía.');
+    } 
   }
 
   const newEntry = await Record.create({
