@@ -1,27 +1,39 @@
-import Record from '../models/Record.js';
+import Record, { RecordType } from '../models/Record.js';
 import Employee from '../models/Employee.js';
 
 export async function getEmployeesInside() {
-  const lastRecords = await Record.aggregate([
+  const now = new Date();
+
+  const lastEntries = await Record.aggregate([
+    { $match: { type: RecordType.ENTRY } },
     { $sort: { selectedTimestamp: -1 } },
     {
       $group: {
         _id: '$employeeId',
-        lastType: { $first: '$type' },
         selectedTimestamp: { $first: '$selectedTimestamp' }
       }
-    },
-    { $match: { lastType: 'entry' } }
+    }
   ]);
 
-  const employeeIds = lastRecords.map(r => r._id);
-  const timestampMap = new Map(lastRecords.map(r => [r._id.toString(), r.selectedTimestamp]));
+  const inside = [];
+  for (const rec of lastEntries) {
+    const exit = await Record.findOne({
+      employeeId: rec._id,
+      type: RecordType.EXIT,
+      selectedTimestamp: { $gte: rec.selectedTimestamp, $lte: now }
+    }).sort({ selectedTimestamp: -1 });
 
-  const employees = await Employee.find({ _id: { $in: employeeIds } }).lean();
+    if (!exit) inside.push(rec);
+  }
+
+  const ids = inside.map(r => r._id);
+  const tsMap = new Map(inside.map(r => [r._id.toString(), r.selectedTimestamp]));
+
+  const employees = await Employee.find({ _id: { $in: ids } }).lean();
 
   return employees.map(e => ({
     ...e,
-    selectedTimestamp: timestampMap.get(e._id.toString())
+    selectedTimestamp: tsMap.get(e._id.toString())
   }));
 }
 

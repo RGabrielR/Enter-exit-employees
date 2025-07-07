@@ -4,7 +4,7 @@ export declare function getEmployeesInside(): Promise<{
     fullName: string;
     email: string;
     dni: string;
-    $assertPopulated: <Paths = {}>(path: string | string[], values?: Partial<Paths> | undefined) => Omit<import("../models/Employee.js").IEmployee, keyof Paths> & Paths;
+    $assertPopulated: <Paths = {}>(path: string | string[], values?: Partial<Paths>) => Omit<import("../models/Employee.js").IEmployee, keyof Paths> & Paths;
     $clearModifiedPaths: () => import("../models/Employee.js").IEmployee;
     $clone: () => import("../models/Employee.js").IEmployee;
     $createModifiedPathsSnapshot: () => import("mongoose").ModifiedPathsSnapshot;
@@ -19,9 +19,9 @@ export declare function getEmployeesInside(): Promise<{
     $locals: import("mongoose").FlattenMaps<Record<string, unknown>>;
     $markValid: (path: string) => void;
     $model: {
-        <ModelType = import("mongoose").Model<unknown, {}, {}, {}, import("mongoose").Document<unknown, {}, unknown, {}> & {
-            _id: import("mongoose").Types.ObjectId;
-        } & {
+        <ModelType = import("mongoose").Model<unknown, {}, {}, {}, import("mongoose").Document<unknown, {}, unknown, {}> & Required<{
+            _id: unknown;
+        }> & {
             __v: number;
         }, any>>(name: string): ModelType;
         <ModelType = import("mongoose").Model<any, {}, {}, {}, any, any>>(): ModelType;
@@ -35,14 +35,14 @@ export declare function getEmployeesInside(): Promise<{
         (value: string | Record<string, any>): import("../models/Employee.js").IEmployee;
     };
     $where: import("mongoose").FlattenMaps<Record<string, unknown>>;
-    baseModelName?: string | undefined;
+    baseModelName?: string;
     collection: import("mongoose").Collection;
     db: import("mongoose").FlattenMaps<import("mongoose").Connection>;
     deleteOne: (options?: import("mongoose").QueryOptions) => any;
     depopulate: <Paths = {}>(path?: string | string[]) => import("mongoose").MergeType<import("../models/Employee.js").IEmployee, Paths>;
     directModifiedPaths: () => Array<string>;
     equals: (doc: import("mongoose").Document<unknown, any, any, Record<string, any>>) => boolean;
-    errors?: import("mongoose").Error.ValidationError | undefined;
+    errors?: import("mongoose").Error.ValidationError;
     get: {
         <T extends string | number | symbol>(path: T, type?: any, options?: any): any;
         (path: string, type?: any, options?: any): any;
@@ -68,7 +68,7 @@ export declare function getEmployeesInside(): Promise<{
         (path: string): boolean;
     };
     isModified: {
-        <T extends string | number | symbol>(path?: T | T[] | undefined, options?: {
+        <T extends string | number | symbol>(path?: T | T[], options?: {
             ignoreAtomics?: boolean;
         } | null): boolean;
         (path?: string | Array<string>, options?: {
@@ -85,9 +85,9 @@ export declare function getEmployeesInside(): Promise<{
         (path: string, scope?: any): void;
     };
     model: {
-        <ModelType = import("mongoose").Model<unknown, {}, {}, {}, import("mongoose").Document<unknown, {}, unknown, {}> & {
-            _id: import("mongoose").Types.ObjectId;
-        } & {
+        <ModelType = import("mongoose").Model<unknown, {}, {}, {}, import("mongoose").Document<unknown, {}, unknown, {}> & Required<{
+            _id: unknown;
+        }> & {
             __v: number;
         }, any>>(name: string): ModelType;
         <ModelType = import("mongoose").Model<any, {}, {}, {}, any, any>>(): ModelType;
@@ -173,9 +173,9 @@ export declare function getEmployeesInside(): Promise<{
         <T extends string | number | symbol>(path: T): void;
         (path: string): void;
     };
-    updateOne: (update?: import("mongoose").UpdateWithAggregationPipeline | import("mongoose").UpdateQuery<import("../models/Employee.js").IEmployee> | undefined, options?: import("mongoose").QueryOptions | null) => import("mongoose").Query<any, import("../models/Employee.js").IEmployee, {}, unknown, "find", Record<string, never>>;
+    updateOne: (update?: import("mongoose").UpdateWithAggregationPipeline | import("mongoose").UpdateQuery<import("../models/Employee.js").IEmployee>, options?: import("mongoose").QueryOptions | null) => import("mongoose").Query<any, import("../models/Employee.js").IEmployee, {}, unknown, "find", Record<string, never>>;
     validate: {
-        <T extends string | number | symbol>(pathsToValidate?: T | T[] | undefined, options?: import("mongoose").AnyObject): Promise<void>;
+        <T extends string | number | symbol>(pathsToValidate?: T | T[], options?: import("mongoose").AnyObject): Promise<void>;
         (pathsToValidate?: import("mongoose").pathsToValidate, options?: import("mongoose").AnyObject): Promise<void>;
         (options: {
             pathsToSkip?: import("mongoose").pathsToSkip;
@@ -186,7 +186,7 @@ export declare function getEmployeesInside(): Promise<{
             pathsToSkip?: import("mongoose").pathsToSkip;
             [k: string]: any;
         }): import("mongoose").Error.ValidationError | null;
-        <T extends string | number | symbol>(pathsToValidate?: T | T[] | undefined, options?: import("mongoose").AnyObject): import("mongoose").Error.ValidationError | null;
+        <T extends string | number | symbol>(pathsToValidate?: T | T[], options?: import("mongoose").AnyObject): import("mongoose").Error.ValidationError | null;
         (pathsToValidate?: import("mongoose").pathsToValidate, options?: import("mongoose").AnyObject): import("mongoose").Error.ValidationError | null;
     };
     __v: number;

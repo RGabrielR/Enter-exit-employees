@@ -13,7 +13,7 @@ export async function registerEntry(employeeId: string, selectedDate?: Date) {
     type: RecordType.EXIT,
     selectedDate: { $gt: selectedTimestamp }
   });
-
+  
   if (lastEntry && !exitAfterwards) {
     throw new Error('El empleado ya está dentro de la compañía.');
   }

@@ -9,6 +9,6 @@ export declare function registerExit(employeeId: string, selectedDate?: Date): P
     }> & {
         __v: number;
     };
-    message: string | null;
+    message: string;
     hours: number;
 }>;

@@ -64,7 +64,40 @@ describe('getEmployeesInside', () => {
     expect(result[0]._id.toString()).toBe(emp1._id.toString());
     expect(result[0]).toHaveProperty('selectedTimestamp');
   });
+
+  it('should return employees currently inside (ignoring future exits)', async () => {
+  const emp = await Employee.create({ fullName: 'Test User', email: 't@test.com', dni: '123', _id: new mongoose.Types.ObjectId() });
+
+  const now = new Date();
+  const pastEntry = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+  const futureExit = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
+  await Record.create({ employeeId: emp._id, type: RecordType.ENTRY, actualTimestamp: now, selectedTimestamp: pastEntry });
+  await Record.create({ employeeId: emp._id, type: RecordType.EXIT, actualTimestamp: now, selectedTimestamp: futureExit });
+
+  const inside = await getEmployeesInside();
+
+  expect(inside).toHaveLength(1);
+  expect(inside[0]._id.toString()).toEqual(emp._id.toString());
+  expect(new Date(inside[0].selectedTimestamp).toISOString()).toEqual(pastEntry.toISOString());
 });
+
+  it('should not include employees who exited correctly', async () => {
+    const emp = await Employee.create({ fullName: 'Out User', email: 'o@test.com', dni: '456', _id: new mongoose.Types.ObjectId() });
+
+    const entry = new Date(Date.now() - 5 * 60 * 60 * 1000);
+    const exit = new Date(Date.now() - 1 * 60 * 60 * 1000);
+
+    await Record.create({ employeeId: emp._id, type: RecordType.ENTRY, actualTimestamp: entry, selectedTimestamp: entry });
+    await Record.create({ employeeId: emp._id, type: RecordType.EXIT, actualTimestamp: exit, selectedTimestamp: exit });
+
+    const inside = await getEmployeesInside();
+
+    expect(inside).toHaveLength(0);
+  });
+});
+
+
 
 
 describe('getAllEmployees', () => {

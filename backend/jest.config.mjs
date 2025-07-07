@@ -1,7 +1,7 @@
 export default {
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
-  extensionsToTreatAsEsm: [''],
+  extensionsToTreatAsEsm: ['.'],
   globals: {
     'ts-jest': {
       useESM: true,
@@ -10,5 +10,8 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'json'],
   testMatch: ['**/__tests__/**/*.+(ts|js)', '**/?(*.)+(spec|test).+(ts|js)'],
-  clearMocks: true
+  clearMocks: true,
+  moduleNameMapper: {
+  '^(\\.{1,2}/.*)\\.js$': '$1'
+},
 };
