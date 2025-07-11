@@ -2,19 +2,9 @@ import Record, { RecordType } from '../models/Record.js';
 import { selectedTimestampFormat } from '../utils/selectedTimestampFormat.js';
 export async function registerEntry(employeeId, selectedDate) {
     const selectedTimestamp = selectedTimestampFormat(selectedDate);
-    const lastEntry = await Record.findOne({
-        employeeId,
-        type: RecordType.ENTRY,
-    }).sort({ actualTimestamp: -1 });
-    if (lastEntry) {
-        const exitAfterwards = await Record.findOne({
-            employeeId,
-            type: RecordType.EXIT,
-            selectedTimestamp: { $gt: lastEntry.selectedTimestamp }
-        });
-        if (!exitAfterwards) {
-            throw new Error('El empleado ya está dentro de la compañía.');
-        }
+    const lastRecord = await Record.findOne({ employeeId }).sort({ actualTimestamp: -1 });
+    if (lastRecord?.type === RecordType.ENTRY) {
+        throw new Error('El empleado ya está dentro de la compañía.');
     }
     const newEntry = await Record.create({
         employeeId,
