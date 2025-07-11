@@ -3,23 +3,19 @@ import Employee from '../models/Employee.js';
 export async function getEmployeesInside() {
     const now = new Date();
     const lastEntries = await Record.aggregate([
-        { $match: { type: RecordType.ENTRY } },
+        { $match: { selectedTimestamp: { $lte: now } } },
         { $sort: { selectedTimestamp: -1 } },
         {
             $group: {
                 _id: '$employeeId',
-                selectedTimestamp: { $first: '$selectedTimestamp' }
+                type: { $first: '$type' },
+                selectedTimestamp: { $first: '$selectedTimestamp' },
             }
         }
     ]);
     const inside = [];
     for (const rec of lastEntries) {
-        const exit = await Record.findOne({
-            employeeId: rec._id,
-            type: RecordType.EXIT,
-            selectedTimestamp: { $gte: rec.selectedTimestamp, $lte: now }
-        }).sort({ selectedTimestamp: -1 });
-        if (!exit)
+        if (rec.type === RecordType.ENTRY)
             inside.push(rec);
     }
     const ids = inside.map(r => r._id);
